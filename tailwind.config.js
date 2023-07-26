@@ -9,7 +9,12 @@ module.exports = {
     './app.vue'
   ],
   theme: {
-    extend: {}
+    extend: {
+      container: (theme) => ({
+        center: true,
+        padding: theme('spacing.5')
+      })
+    }
   },
   plugins: []
 }
