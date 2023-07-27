@@ -25,7 +25,7 @@
                 />
               </svg>
             </button>
-            <h3 class="text-center">{{ currentYear }} {{ currentMonth + 1 }}</h3>
+            <h3 class="text-center font-bold">{{ currentMonthName }} {{ currentYear }}</h3>
             <button class="mr-1 rounded border border-slate-300 p-1 hover:border-cyan-500">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -88,6 +88,11 @@ export default {
     }
   },
   computed: {
+    currentMonthName() {
+      return new Date(this.currentYear, this.currentMonth).toLocaleString('default', {
+        month: 'long'
+      })
+    },
     totalDaysInMonth() {
       // pass 0 as day to get last day of current month
       return new Date(this.currentYear, this.currentMonth + 1, 0).getDate()
