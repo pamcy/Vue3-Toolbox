@@ -9,7 +9,10 @@
           <h1 class="text-center text-3xl font-bold text-cyan-500">{{ title }}</h1>
 
           <div class="mt-8 grid grid-cols-[auto_1fr_auto]">
-            <button class="ml-1 rounded border border-slate-300 p-1 hover:border-cyan-500">
+            <button
+              class="ml-1 rounded border border-slate-300 p-1 hover:border-cyan-500"
+              @click="toPrevMonth"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -26,7 +29,10 @@
               </svg>
             </button>
             <h3 class="text-center font-bold">{{ currentMonthName }} {{ currentYear }}</h3>
-            <button class="mr-1 rounded border border-slate-300 p-1 hover:border-cyan-500">
+            <button
+              class="mr-1 rounded border border-slate-300 p-1 hover:border-cyan-500"
+              @click="toNextMonth"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -113,6 +119,24 @@ export default {
       }
 
       return startDay
+    }
+  },
+  methods: {
+    toNextMonth() {
+      if (this.currentMonth === 11) {
+        this.currentMonth = 0
+        this.currentYear++
+      } else {
+        this.currentMonth++
+      }
+    },
+    toPrevMonth() {
+      if (this.currentMonth === 0) {
+        this.currentMonth = 11
+        this.currentYear--
+      } else {
+        this.currentMonth--
+      }
     }
   }
 }
