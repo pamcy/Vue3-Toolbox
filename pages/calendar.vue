@@ -25,7 +25,7 @@
                 />
               </svg>
             </button>
-            <h3 class="text-center">{{ currentMonth }}</h3>
+            <h3 class="text-center">{{ currentYear }} {{ currentMonth + 1 }}</h3>
             <button class="mr-1 rounded border border-slate-300 p-1 hover:border-cyan-500">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -55,7 +55,20 @@
               </div>
             </div>
             <div class="mt-4 grid grid-cols-7 gap-4">
-              <div v-for="d in 31" :key="d" class="flex items-center justify-center">{{ d }}</div>
+              <!-- render empty divs for days before the start day of month -->
+              <div
+                v-for="day in startDayOfMonth"
+                :key="day"
+                class="flex items-center justify-center"
+              ></div>
+
+              <div
+                v-for="number in totalDaysInMonth"
+                :key="number"
+                class="flex items-center justify-center"
+              >
+                {{ number }}
+              </div>
             </div>
           </div>
         </div>
@@ -69,8 +82,32 @@ export default {
   data() {
     return {
       title: 'Calendar',
-      currentMonth: new Date().getMonth(),
-      days: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'] // Sunday - Saturday : 0 - 6
+      currentYear: new Date().getFullYear(),
+      currentMonth: new Date().getMonth(), // January - December : 0 - 11
+      days: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+    }
+  },
+  computed: {
+    totalDaysInMonth() {
+      // pass 0 as day to get last day of current month
+      return new Date(this.currentYear, this.currentMonth + 1, 0).getDate()
+    },
+    startDayOfMonth() {
+      // pass 1 as day to get first day of current month
+
+      // default first day of month is Sunday : 0
+      // Sunday - Saturday : 0 - 6
+
+      // but we want Monday - Sunday : 0 - 6
+      // so we subtract 1 from first day of month
+      const startDay = new Date(this.currentYear, this.currentMonth, 1).getDay() - 1
+
+      if (startDay === -1) {
+        // if start day is Sunday, we want it to be the last day of week
+        return 6
+      }
+
+      return startDay
     }
   }
 }
