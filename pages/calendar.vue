@@ -5,7 +5,7 @@
 
     <main class="my-24">
       <div class="container max-w-lg">
-        <div class="bg-white p-8 shadow-sm">
+        <div class="rounded bg-white p-8 shadow-sm">
           <h1 class="text-center text-3xl font-bold text-cyan-500">{{ title }}</h1>
 
           <div class="mt-8 grid grid-cols-[auto_1fr_auto]">
@@ -72,6 +72,7 @@
                 v-for="number in totalDaysInMonth"
                 :key="number"
                 class="flex items-center justify-center"
+                :class="{ 'rounded-full bg-cyan-500 text-white': isToday(number) }"
               >
                 {{ number }}
               </div>
@@ -90,6 +91,7 @@ export default {
       title: 'Calendar',
       currentYear: new Date().getFullYear(),
       currentMonth: new Date().getMonth(), // January - December : 0 - 11
+      currentDate: new Date().getDate(),
       days: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
     }
   },
@@ -137,6 +139,13 @@ export default {
       } else {
         this.currentMonth--
       }
+    },
+    isToday(day) {
+      return (
+        day === this.currentDate &&
+        this.currentMonth === new Date().getMonth() &&
+        this.currentYear === new Date().getFullYear()
+      )
     }
   }
 }
