@@ -4,5 +4,6 @@
 
     <NuxtLink to="/"> Home </NuxtLink>
     <NuxtLink to="/calendar"> Calendar </NuxtLink>
+    <NuxtLink to="/markdown"> Markdown </NuxtLink>
   </div>
 </template>
