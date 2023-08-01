@@ -5,8 +5,8 @@
         <h2 class="text-center text-3xl font-bold text-cyan-500">{{ title }}</h2>
 
         <div class="mt-8 flex min-h-screen">
-          <textarea v-model="content" class="w-1/2 bg-white p-5 outline-0"></textarea>
-          <article class="w-1/2 bg-stone-100 p-5" v-html="compiledMarkdown"></article>
+          <textarea v-model="content" class="w-1/2 bg-white p-6 outline-0"></textarea>
+          <article class="prose w-1/2 bg-stone-100 p-6" v-html="compiledMarkdown"></article>
         </div>
       </div>
     </main>
