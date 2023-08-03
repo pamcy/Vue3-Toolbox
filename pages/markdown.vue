@@ -4,14 +4,17 @@
       <div class="container">
         <h2 class="text-center text-3xl font-bold text-cyan-500">{{ title }}</h2>
 
-        <div class="mt-8 flex min-h-screen">
+        <div class="mt-8 flex min-h-screen border-4">
           <textarea
             ref="contentRef"
             :value="content"
             class="w-1/2 bg-white p-6 outline-0"
             @input="updateContent"
           ></textarea>
-          <article class="prose w-1/2 bg-stone-100 p-6" v-html="compiledMarkdown"></article>
+          <article
+            class="prose w-1/2 max-w-none bg-stone-100 p-6"
+            v-html="compiledMarkdown"
+          ></article>
         </div>
       </div>
     </main>
