@@ -6,9 +6,11 @@
 </template>
 
 <script setup>
+const route = useRoute()
+
 useHead({
   bodyAttrs: {
-    class: 'bg-slate-100'
+    class: route.name === 'carousel' ? 'bg-neutral-900' : 'bg-slate-100'
   }
 })
 </script>
