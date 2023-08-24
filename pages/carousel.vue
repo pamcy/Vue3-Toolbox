@@ -3,13 +3,15 @@
     <main class="my-24">
       <div class="relative h-[calc(100vh_-_96px*2)] md:h-[60vh]">
         <div v-for="(slide, index) in slider" :key="slide.name" class="absolute h-full w-full">
-          <figure v-if="index == currentSlide" class="relative h-full translate-x-full opacity-0">
-            <img :src="slide.img" alt="slide.name" class="h-full w-full object-cover" />
-            <figcaption class="absolute inset-x-0 bottom-16 p-5 text-center text-xl text-white">
-              <span class="mb-4 block text-3xl">{{ title }}</span>
-              <span>{{ slide.name }}</span>
-            </figcaption>
-          </figure>
+          <Transition name="slideIn">
+            <figure v-if="index == currentSlide" class="relative h-full">
+              <img :src="slide.img" alt="slide.name" class="h-full w-full object-cover" />
+              <figcaption class="absolute inset-x-0 bottom-16 p-5 text-center text-xl text-white">
+                <span class="mb-4 block text-3xl">{{ title }}</span>
+                <span>{{ slide.name }}</span>
+              </figcaption>
+            </figure>
+          </Transition>
         </div>
         <nav></nav>
       </div>
@@ -24,7 +26,7 @@ export default {
       title: 'Carousel',
       currentSlide: 0,
       interval: null,
-      speed: 8000,
+      speed: 5000,
       slider: [
         {
           name: 'heart-shaped bowl with strawberries',
@@ -62,3 +64,20 @@ export default {
   }
 }
 </script>
+
+<style>
+.slideIn-enter-active,
+.slideIn-leave-active {
+  transform: translateX(0);
+  opacity: 1;
+  transition:
+    opacity 0.25s,
+    transform 0.7s;
+}
+
+.slideIn-enter-from,
+.slideIn-leave-to {
+  transform: translateX(100%);
+  opacity: 0;
+}
+</style>
