@@ -1,7 +1,7 @@
 <template>
   <div>
     <main class="my-24">
-      <div class="relative h-[calc(100vh_-_96px*2)] md:h-[60vh]">
+      <div class="relative mb-8 h-[calc(100vh_-_96px*2)] md:h-[60vh]">
         <div v-for="(slide, index) in slider" :key="slide.name" class="absolute h-full w-full">
           <Transition name="slideIn">
             <figure v-if="index == currentSlide" class="relative h-full">
@@ -13,8 +13,18 @@
             </figure>
           </Transition>
         </div>
-        <nav></nav>
       </div>
+
+      <nav class="flex justify-center">
+        <ul class="flex">
+          <li
+            v-for="(dot, index) in slider"
+            :key="dot.name"
+            class="mx-1 h-4 w-4 cursor-pointer rounded-full"
+            :class="index == currentSlide ? 'bg-cyan-500' : 'bg-stone-100'"
+          ></li>
+        </ul>
+      </nav>
     </main>
   </div>
 </template>
@@ -26,7 +36,7 @@ export default {
       title: 'Carousel',
       currentSlide: 0,
       interval: null,
-      speed: 5000,
+      speed: 6000,
       slider: [
         {
           name: 'heart-shaped bowl with strawberries',
@@ -71,8 +81,8 @@ export default {
   transform: translateX(0);
   opacity: 1;
   transition:
-    opacity 0.25s,
-    transform 0.7s;
+    opacity 0.2s,
+    transform 0.6s;
 }
 
 .slideIn-enter-from,
