@@ -1,13 +1,14 @@
 <template>
   <div>
     <main class="my-24">
-      <div class="relative mb-8 h-[calc(100vh_-_96px*2)] md:h-[60vh]">
+      <h2 class="text-center text-3xl font-bold text-cyan-500">{{ title }}</h2>
+
+      <div class="relative my-8 h-[calc(100vh_-_96px*2)] md:h-[60vh]">
         <div v-for="(slide, index) in slider" :key="slide.name" class="absolute h-full w-full">
           <Transition name="slideIn">
             <figure v-if="index == currentSlide" class="relative h-full">
               <img :src="slide.img" alt="slide.name" class="h-full w-full object-cover" />
               <figcaption class="absolute inset-x-0 bottom-16 p-5 text-center text-xl text-white">
-                <span class="mb-4 block text-3xl">{{ title }}</span>
                 <span>{{ slide.name }}</span>
               </figcaption>
             </figure>
@@ -22,6 +23,7 @@
             :key="dot.name"
             class="mx-1 h-4 w-4 cursor-pointer rounded-full"
             :class="index == currentSlide ? 'bg-cyan-500' : 'bg-stone-100'"
+            @click="changeSlide(index)"
           ></li>
         </ul>
       </nav>
@@ -54,13 +56,13 @@ export default {
     }
   },
   mounted() {
-    this.changeSlide()
+    this.autoPlaySlider()
   },
   beforeUnmount() {
     clearInterval(this.interval)
   },
   methods: {
-    changeSlide() {
+    autoPlaySlider() {
       this.interval = setInterval(() => {
         if (this.currentSlide >= this.slider.length - 1) {
           this.currentSlide = 0
@@ -70,6 +72,10 @@ export default {
 
         this.currentSlide++
       }, this.speed)
+    },
+    changeSlide(index) {
+      this.currentSlide = index
+      clearInterval(this.interval)
     }
   }
 }
