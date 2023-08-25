@@ -15,6 +15,11 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     // https://router.vuejs.org/guide/advanced/lazy-loading.html#Grouping-Components-in-the-Same-Chunk
     component: () => import('../views/CalendarView.vue')
+  },
+  {
+    path: '/markdown',
+    name: 'markdown',
+    component: () => import('../views/MarkdownView.vue')
   }
 ]
 
