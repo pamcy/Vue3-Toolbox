@@ -20,6 +20,11 @@ const routes = [
     path: '/markdown',
     name: 'markdown',
     component: () => import('../views/MarkdownView.vue')
+  },
+  {
+    path: '/carousel',
+    name: 'carousel',
+    component: () => import('../views/CarouselView.vue')
   }
 ]
 

@@ -6,6 +6,7 @@
           <li class="mx-3"><RouterLink to="/">Home</RouterLink></li>
           <li class="mx-3"><RouterLink to="/calendar">Calendar</RouterLink></li>
           <li class="mx-3"><RouterLink to="/markdown">Markdown</RouterLink></li>
+          <li class="mx-3"><RouterLink to="/carousel">Carousel</RouterLink></li>
         </ul>
       </nav>
     </div>
