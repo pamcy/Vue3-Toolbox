@@ -22,7 +22,7 @@
             v-for="(dot, index) in slider"
             :key="dot.name"
             class="mx-1 h-4 w-4 cursor-pointer rounded-full"
-            :class="index == currentSlide ? 'bg-cyan-500' : 'bg-stone-100'"
+            :class="index == currentSlide ? 'bg-cyan-500' : 'bg-stone-200'"
             @click="changeSlide(index)"
           ></li>
         </ul>
@@ -81,13 +81,13 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .slideIn-enter-active,
 .slideIn-leave-active {
   transform: translateX(0);
   opacity: 1;
   transition:
-    opacity 0.2s,
+    opacity 0.4s,
     transform 0.6s;
 }
 
