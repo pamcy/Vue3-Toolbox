@@ -1,9 +1,9 @@
-<script setup>
-import { RouterView } from 'vue-router'
-</script>
-
 <template>
-  <h1>haha</h1>
-
+  <AppHeader />
   <RouterView />
 </template>
+
+<script setup>
+import { RouterView } from 'vue-router'
+import AppHeader from './components/AppHeader.vue'
+</script>

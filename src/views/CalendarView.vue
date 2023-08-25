@@ -1,87 +1,78 @@
 <template>
-  <div>
-    <NuxtLink to="/"> Home </NuxtLink>
-    <NuxtLink to="/calendar"> Calendar </NuxtLink>
+  <main class="my-24">
+    <div class="container max-w-lg">
+      <div class="rounded bg-white p-8 shadow-sm">
+        <h1 class="text-center text-3xl font-bold text-cyan-500">{{ title }}</h1>
 
-    <main class="my-24">
-      <div class="container max-w-lg">
-        <div class="rounded bg-white p-8 shadow-sm">
-          <h1 class="text-center text-3xl font-bold text-cyan-500">{{ title }}</h1>
-
-          <div class="mt-8 grid grid-cols-[auto_1fr_auto]">
-            <button
-              class="ml-1 rounded border border-slate-300 p-1 hover:border-cyan-500"
-              @click="toPrevMonth"
+        <div class="mt-8 grid grid-cols-[auto_1fr_auto]">
+          <button
+            class="ml-1 rounded border border-slate-300 p-1 hover:border-cyan-500"
+            @click="toPrevMonth"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="h-4 w-4"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                class="h-4 w-4"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M15.75 19.5L8.25 12l7.5-7.5"
-                />
-              </svg>
-            </button>
-            <h3 class="text-center font-bold">{{ currentMonthName }} {{ currentYear }}</h3>
-            <button
-              class="mr-1 rounded border border-slate-300 p-1 hover:border-cyan-500"
-              @click="toNextMonth"
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M15.75 19.5L8.25 12l7.5-7.5"
+              />
+            </svg>
+          </button>
+          <h3 class="text-center font-bold">{{ currentMonthName }} {{ currentYear }}</h3>
+          <button
+            class="mr-1 rounded border border-slate-300 p-1 hover:border-cyan-500"
+            @click="toNextMonth"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="h-4 w-4"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                class="h-4 w-4"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M8.25 4.5l7.5 7.5-7.5 7.5"
-                />
-              </svg>
-            </button>
-          </div>
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+            </svg>
+          </button>
+        </div>
 
-          <div class="mt-5">
-            <div class="grid grid-cols-7 gap-4">
-              <div
-                v-for="day in days"
-                :key="day"
-                class="flex items-center justify-center text-slate-400"
-              >
-                {{ day }}
-              </div>
+        <div class="mt-5">
+          <div class="grid grid-cols-7 gap-4">
+            <div
+              v-for="day in days"
+              :key="day"
+              class="flex items-center justify-center text-slate-400"
+            >
+              {{ day }}
             </div>
-            <div class="mt-4 grid grid-cols-7 gap-4">
-              <!-- render empty divs for days before the start day of month -->
-              <div
-                v-for="day in startDayOfMonth"
-                :key="day"
-                class="flex items-center justify-center"
-              ></div>
+          </div>
+          <div class="mt-4 grid grid-cols-7 gap-4">
+            <!-- render empty divs for days before the start day of month -->
+            <div
+              v-for="day in startDayOfMonth"
+              :key="day"
+              class="flex items-center justify-center"
+            ></div>
 
-              <div
-                v-for="number in totalDaysInMonth"
-                :key="number"
-                class="flex items-center justify-center"
-                :class="{ 'rounded-full bg-cyan-500 text-white': isToday(number) }"
-              >
-                {{ number }}
-              </div>
+            <div
+              v-for="number in totalDaysInMonth"
+              :key="number"
+              class="flex items-center justify-center"
+              :class="{ 'rounded-full bg-cyan-500 text-white': isToday(number) }"
+            >
+              {{ number }}
             </div>
           </div>
         </div>
       </div>
-    </main>
-  </div>
+    </div>
+  </main>
 </template>
 
 <script>
