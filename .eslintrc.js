@@ -1,17 +1,19 @@
+/* eslint-env node */
 module.exports = {
+  root: true,
   env: {
+    node: true,
     browser: true,
     es2021: true
   },
-  extends: ['@nuxtjs', 'plugin:vue/vue3-recommended', 'prettier'],
+  extends: ['eslint:recommended', 'plugin:vue/vue3-recommended', 'plugin:prettier/recommended'],
+  plugins: ['vue', 'prettier'],
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module'
-  },
-  plugins: ['prettier'],
-  rules: {
-    // 解決因為 Nuxt 3 具有自動導入，但是在 Vue SFC 中沒有 import 導致提示錯誤。
-    'no-undef': 'off',
-    'prettier/prettier': 'error'
   }
 }
+
+// 參考：
+// Vue3+Vite项目，如何配置ESLint和Prettier实现代码规范化？
+// https://zhuanlan.zhihu.com/p/619030608
