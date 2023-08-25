@@ -8,7 +8,7 @@
         <div class="rounded bg-white p-8 shadow-sm">
           <h1 class="text-center text-3xl font-bold text-cyan-500">{{ title }}</h1>
 
-          <div class="grid-cols-[auto_1fr_auto] mt-8 grid">
+          <div class="mt-8 grid grid-cols-[auto_1fr_auto]">
             <button
               class="ml-1 rounded border border-slate-300 p-1 hover:border-cyan-500"
               @click="toPrevMonth"
