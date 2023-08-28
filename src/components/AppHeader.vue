@@ -10,7 +10,10 @@
 
         <button @click="isLoginModalOpen = true">Login</button>
 
-        <LoginModal v-if="isLoginModalOpen" @close-modal="isLoginModalOpen = false" />
+        <LoginModal
+          :is-login-modal-open="isLoginModalOpen"
+          @close-modal="isLoginModalOpen = false"
+        />
       </nav>
     </div>
   </header>
