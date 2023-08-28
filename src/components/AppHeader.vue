@@ -8,8 +8,9 @@
           </li>
         </ul>
 
-        <button>Login</button>
-        <LoginModal />
+        <button @click="isLoginModalOpen = true">Login</button>
+
+        <LoginModal v-if="isLoginModalOpen" @close-modal="isLoginModalOpen = false" />
       </nav>
     </div>
   </header>
@@ -38,4 +39,5 @@ const menuItems = ref([
     path: 'carousel'
   }
 ])
+const isLoginModalOpen = ref(false)
 </script>

@@ -1,11 +1,11 @@
 <template>
-  <div class="fixed inset-0 z-10">
-    <div class="fixed inset-0 -z-10 bg-stone-950 opacity-50"></div>
+  <div class="fixed inset-0 z-20">
+    <div class="fixed inset-0 bg-stone-950 opacity-50" @click="$emit('closeModal')"></div>
     <div class="flex h-full items-center justify-center">
-      <div class="m-8 w-full max-w-md bg-white">
+      <div class="z-10 m-8 w-full max-w-md bg-white">
         <header class="relative flex min-h-[64px] items-center justify-center px-6">
           <h2 class="text-3xl font-bold">Login</h2>
-          <button class="absolute right-6 ml-auto">
+          <button class="absolute right-6 ml-auto" @click="$emit('closeModal')">
             <CloseIcon />
           </button>
         </header>
@@ -56,4 +56,6 @@
 
 <script setup>
 import CloseIcon from './icons/CloseIcon.vue'
+
+defineEmits('closeModal')
 </script>
