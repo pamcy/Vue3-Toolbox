@@ -9,14 +9,13 @@
         </ul>
 
         <button @click="isLoginModalOpen = true">Login</button>
-
-        <LoginModal
-          :is-login-modal-open="isLoginModalOpen"
-          @close-modal="isLoginModalOpen = false"
-        />
       </nav>
     </div>
   </header>
+
+  <Teleport to="body">
+    <LoginModal :is-login-modal-open="isLoginModalOpen" @close-modal="isLoginModalOpen = false" />
+  </Teleport>
 </template>
 
 <script setup>
