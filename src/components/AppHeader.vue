@@ -8,20 +8,17 @@
           </li>
         </ul>
 
-        <button @click="isLoginModalOpen = true">Login</button>
+        <button @click="$emit('openLoginModal')">Login</button>
       </nav>
     </div>
   </header>
-
-  <Teleport to="body">
-    <LoginModal :is-login-modal-open="isLoginModalOpen" @close-modal="isLoginModalOpen = false" />
-  </Teleport>
 </template>
 
 <script setup>
 import { RouterLink } from 'vue-router'
 import { ref } from 'vue'
-import LoginModal from './LoginModal.vue'
+
+defineEmits('openLoginModal')
 
 const menuItems = ref([
   {
@@ -41,5 +38,4 @@ const menuItems = ref([
     path: 'carousel'
   }
 ])
-const isLoginModalOpen = ref(false)
 </script>
