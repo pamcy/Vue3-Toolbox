@@ -16,7 +16,11 @@ const formData = ref({
 })
 
 const submitForm = () => {
-  console.log(formData.value.email)
+  if (!formData.value.email | !formData.value.password) {
+    alert('Please fill in all fields')
+
+    return
+  }
 
   // Sign in existing users
   // https://firebase.google.com/docs/auth/web/start
