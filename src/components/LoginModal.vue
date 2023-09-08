@@ -1,4 +1,7 @@
 <script setup>
+import { auth } from '../utils/firebase'
+import { signInWithEmailAndPassword } from 'firebase/auth'
+import { ref } from 'vue'
 import CloseIcon from './icons/CloseIcon.vue'
 
 defineProps({
@@ -6,6 +9,28 @@ defineProps({
 })
 
 defineEmits('closeModal')
+
+const formData = ref({
+  email: '',
+  password: ''
+})
+
+const submitForm = () => {
+  console.log(formData.value.email)
+
+  // Sign in existing users
+  // https://firebase.google.com/docs/auth/web/start
+  signInWithEmailAndPassword(auth, formData.value.email, formData.value.password)
+    .then((res) => {
+      console.log(res)
+    })
+    .catch((error) => {
+      const errorCode = error.errorCode
+      const errorMsg = error.message
+
+      console.error(`${errorCode}: ${errorMsg}`)
+    })
+}
 </script>
 
 <template>
@@ -23,11 +48,12 @@ defineEmits('closeModal')
           </header>
 
           <main class="p-6">
-            <form>
+            <form @submit.prevent="submitForm">
               <div class="mb-2">
                 <label for="email">Email</label>
                 <input
                   id="email"
+                  v-model="formData.email"
                   type="email"
                   name="email"
                   placeholder="Enter your email"
@@ -38,6 +64,7 @@ defineEmits('closeModal')
                 <label for="password">Password</label>
                 <input
                   id="password"
+                  v-model="formData.password"
                   type="password"
                   name="password"
                   placeholder="Enter your password"
