@@ -44,6 +44,6 @@ onMounted(() => {
   <RouterView />
 
   <Teleport to="body">
-    <LoginModal :is-login-modal-open="isLoginModalOpen" @close-modal="isLoginModalOpen = false" />
+    <LoginModal :is-login-modal-open="isLoginModalOpen" @close-login="isLoginModalOpen = false" />
   </Teleport>
 </template>

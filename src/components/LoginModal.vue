@@ -8,12 +8,17 @@ defineProps({
   isLoginModalOpen: Boolean
 })
 
-defineEmits('closeModal')
+const emit = defineEmits(['closeLogin'])
 
 const formData = ref({
   email: '',
   password: ''
 })
+const isAuthLoading = ref(false)
+
+const closeLoginModal = () => {
+  emit('closeLogin')
+}
 
 const submitForm = () => {
   if (!formData.value.email | !formData.value.password) {
@@ -22,11 +27,17 @@ const submitForm = () => {
     return
   }
 
+  isAuthLoading.value = true
+
   // Sign in existing users
   // https://firebase.google.com/docs/auth/web/start
   signInWithEmailAndPassword(auth, formData.value.email, formData.value.password)
     .then((res) => {
       console.log(res)
+
+      formData.value.email = ''
+      formData.value.password = ''
+      closeLoginModal()
     })
     .catch((error) => {
       const errorCode = error.errorCode
@@ -34,19 +45,22 @@ const submitForm = () => {
 
       console.error(`${errorCode}: ${errorMsg}`)
     })
+    .finally(() => {
+      isAuthLoading.value = false
+    })
 }
 </script>
 
 <template>
   <Transition name="modal">
     <div v-if="isLoginModalOpen" class="fixed inset-0 z-20">
-      <div class="fixed inset-0 bg-stone-950 opacity-50" @click="$emit('closeModal')"></div>
+      <div class="fixed inset-0 bg-stone-950 opacity-50" @click="closeLoginModal"></div>
 
       <div class="flex h-full items-center justify-center">
         <div class="modal-dialog z-10 m-8 w-full max-w-md bg-white shadow transition-transform">
           <header class="relative flex min-h-[64px] items-center justify-center px-6">
             <h2 class="text-3xl font-bold">Login</h2>
-            <button class="absolute right-6 ml-auto" @click="$emit('closeModal')">
+            <button class="absolute right-6 ml-auto" @click="closeLoginModal">
               <CloseIcon />
             </button>
           </header>
@@ -79,7 +93,8 @@ const submitForm = () => {
                 type="submit"
                 class="mt-5 w-full rounded bg-cyan-500 p-3 text-white hover:opacity-80"
               >
-                Continue
+                <span v-if="isAuthLoading">⌛</span>
+                <span v-else>Continue</span>
               </button>
             </form>
 
