@@ -9,6 +9,7 @@
         </ul>
 
         <button @click="$emit('openLoginModal')">Login</button>
+        <button @click="$emit('handleLogout')">Logout</button>
       </nav>
     </div>
   </header>
@@ -18,7 +19,7 @@
 import { RouterLink } from 'vue-router'
 import { ref } from 'vue'
 
-defineEmits('openLoginModal')
+defineEmits('openLoginModal', 'handleLogout')
 
 const menuItems = ref([
   {

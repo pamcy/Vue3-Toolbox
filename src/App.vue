@@ -1,6 +1,6 @@
 <script setup>
 import { auth } from './utils/firebase'
-import { onAuthStateChanged } from 'firebase/auth'
+import { onAuthStateChanged, signOut } from 'firebase/auth'
 import { RouterView } from 'vue-router'
 import { onMounted, ref } from 'vue'
 
@@ -10,6 +10,18 @@ import LoginModal from './components/LoginModal.vue'
 const isLoginModalOpen = ref(false)
 const isLoggedIn = ref(false)
 const authUser = ref({})
+
+const handleLogout = () => {
+  // Sign out a user
+  // https://firebase.google.com/docs/auth/web/password-auth
+  signOut(auth)
+    .then(() => {
+      console.log('sign out successfully')
+    })
+    .catch((error) => {
+      console.error(error)
+    })
+}
 
 onMounted(() => {
   // Get the currently signed-in user
@@ -27,7 +39,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <AppHeader @open-login-modal="isLoginModalOpen = true" />
+  <AppHeader @open-login-modal="isLoginModalOpen = true" @handle-logout="handleLogout" />
 
   <RouterView />
 
