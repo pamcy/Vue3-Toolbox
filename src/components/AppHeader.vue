@@ -8,8 +8,8 @@
           </li>
         </ul>
 
-        <button @click="$emit('openLoginModal')">Login</button>
-        <button @click="$emit('handleLogout')">Logout</button>
+        <button v-if="isLoggedIn" class="underline" @click="$emit('handleLogout')">Logout</button>
+        <button v-else class="underline" @click="$emit('openLoginModal')">Login</button>
       </nav>
     </div>
   </header>
@@ -19,6 +19,9 @@
 import { RouterLink } from 'vue-router'
 import { ref } from 'vue'
 
+defineProps({
+  isLoggedIn: Boolean
+})
 defineEmits('openLoginModal', 'handleLogout')
 
 const menuItems = ref([

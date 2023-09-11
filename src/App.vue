@@ -39,7 +39,11 @@ onMounted(() => {
 </script>
 
 <template>
-  <AppHeader @open-login-modal="isLoginModalOpen = true" @handle-logout="handleLogout" />
+  <AppHeader
+    :is-logged-in="isLoggedIn"
+    @open-login-modal="isLoginModalOpen = true"
+    @handle-logout="handleLogout"
+  />
 
   <RouterView />
 
