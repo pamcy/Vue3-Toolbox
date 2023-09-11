@@ -1,7 +1,7 @@
 <script setup>
 import { auth } from '../utils/firebase'
 import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
-import { watch, ref, nextTick } from 'vue'
+import { watchEffect, ref, nextTick } from 'vue'
 import CloseIcon from './icons/CloseIcon.vue'
 
 const props = defineProps({
@@ -17,7 +17,7 @@ const formData = ref({
 const emailRef = ref(null)
 const isAuthLoading = ref(false)
 
-watch(() => {
+watchEffect(() => {
   if (props.isLoginModalOpen) {
     // 確保 LoginModal DOM 已經完全 render
     nextTick(() => {
