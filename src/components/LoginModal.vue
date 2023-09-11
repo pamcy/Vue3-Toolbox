@@ -1,10 +1,10 @@
 <script setup>
 import { auth } from '../utils/firebase'
 import { signInWithEmailAndPassword } from 'firebase/auth'
-import { ref } from 'vue'
+import { watch, ref, nextTick } from 'vue'
 import CloseIcon from './icons/CloseIcon.vue'
 
-defineProps({
+const props = defineProps({
   isLoginModalOpen: Boolean
 })
 
@@ -14,7 +14,17 @@ const formData = ref({
   email: '',
   password: ''
 })
+const emailRef = ref(null)
 const isAuthLoading = ref(false)
+
+watch(() => {
+  if (props.isLoginModalOpen) {
+    // 確保 LoginModal DOM 已經完全 render
+    nextTick(() => {
+      emailRef.value.focus()
+    })
+  }
+})
 
 const closeLoginModal = () => {
   emit('closeLogin')
@@ -37,6 +47,7 @@ const submitForm = () => {
 
       formData.value.email = ''
       formData.value.password = ''
+
       closeLoginModal()
     })
     .catch((error) => {
@@ -71,6 +82,7 @@ const submitForm = () => {
                 <label for="email">Email</label>
                 <input
                   id="email"
+                  ref="emailRef"
                   v-model="formData.email"
                   type="email"
                   name="email"
