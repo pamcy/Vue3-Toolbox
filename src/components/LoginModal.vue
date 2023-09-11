@@ -1,6 +1,6 @@
 <script setup>
 import { auth } from '../utils/firebase'
-import { signInWithEmailAndPassword } from 'firebase/auth'
+import { signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
 import { watch, ref, nextTick } from 'vue'
 import CloseIcon from './icons/CloseIcon.vue'
 
@@ -60,6 +60,26 @@ const submitForm = () => {
       isAuthLoading.value = false
     })
 }
+
+const loginWithGoogle = () => {
+  const provider = new GoogleAuthProvider()
+
+  signInWithPopup(auth, provider)
+    .then((result) => {
+      // Authenticate Using Google
+      // https://firebase.google.com/docs/auth/web/google-signin#handle_the_sign-in_flow_with_the_firebase_sdk
+      console.log(`${result.user.email} logged in successfully`)
+
+      closeLoginModal()
+    })
+    .catch((error) => {
+      const errorCode = error.code
+      const errorMessage = error.message
+      const email = error.customData.email
+
+      console.error(`${errorCode}: ${errorMessage}. Sign in failed with ${email}`)
+    })
+}
 </script>
 
 <template>
@@ -116,7 +136,10 @@ const submitForm = () => {
               or
             </div>
 
-            <button class="w-full rounded border border-stone-950 p-3 hover:opacity-80">
+            <button
+              class="w-full rounded border border-stone-950 p-3 hover:opacity-80"
+              @click="loginWithGoogle"
+            >
               Continue with Google
             </button>
           </main>
