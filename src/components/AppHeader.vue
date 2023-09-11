@@ -22,7 +22,7 @@ import { ref } from 'vue'
 defineProps({
   isLoggedIn: Boolean
 })
-defineEmits('openLoginModal', 'handleLogout')
+defineEmits(['openLoginModal', 'handleLogout'])
 
 const menuItems = ref([
   {

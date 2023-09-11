@@ -30,7 +30,7 @@ const closeLoginModal = () => {
   emit('closeLogin')
 }
 
-const submitForm = () => {
+const submitLoginForm = () => {
   if (!formData.value.email | !formData.value.password) {
     alert('Please fill in all fields')
 
@@ -97,7 +97,7 @@ const loginWithGoogle = () => {
           </header>
 
           <main class="p-6">
-            <form @submit.prevent="submitForm">
+            <form @submit.prevent="submitLoginForm">
               <div class="mb-2">
                 <label for="email">Email</label>
                 <input
